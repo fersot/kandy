@@ -1,0 +1,36 @@
+{
+  "name": "kandy",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Calendario de escritorio que unifica Google, Microsoft, Zoho, CalDAV e ICS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fersot/kandy.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@fullcalendar/core": "6.1.22",
+    "@fullcalendar/daygrid": "6.1.22",
+    "@fullcalendar/interaction": "6.1.22",
+    "@fullcalendar/list": "6.1.22",
+    "@fullcalendar/timegrid": "6.1.22",
+    "@fullcalendar/vue3": "6.1.22",
+    "@tauri-apps/api": "^2.12.4",
+    "@tauri-apps/plugin-opener": "^2.7.3",
+    "vue": "^3.5.45"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.12.4",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.7",
+    "vue-tsc": "^3.3.14"
+  }
+}

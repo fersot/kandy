@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.fersot.Kandy</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Kandy</name>
+  <summary>Todos tus calendarios en un solo lugar</summary>
+  <developer id="io.github.fersot">
+    <name>FERSOFT</name>
+  </developer>
+  <description>
+    <p>
+      Kandy es un calendario de escritorio que unifica Google Calendar, Microsoft 365 / Outlook,
+      Zoho Calendar, servidores CalDAV (iCloud, Nextcloud, Fastmail, Yahoo…) y suscripciones ICS.
+    </p>
+    <ul>
+      <li>Vistas de mes, semana, día y agenda</li>
+      <li>Crea, edita, arrastra y elimina eventos en cualquier cuenta</li>
+      <li>Funciona sin conexión gracias a una caché local</li>
+      <li>Los tokens se guardan cifrados en el llavero del sistema</li>
+      <li>Recordatorios con notificaciones de escritorio</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.fersot.Kandy.desktop</launchable>
+  <url type="homepage">https://github.com/fersot/kandy</url>
+  <url type="bugtracker">https://github.com/fersot/kandy/issues</url>
+  <url type="vcs-browser">https://github.com/fersot/kandy</url>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Vista semanal con varias cuentas</caption>
+      <image>https://raw.githubusercontent.com/fersot/kandy/main/docs/screenshots/semana.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Detalles de un evento</caption>
+      <image>https://raw.githubusercontent.com/fersot/kandy/main/docs/screenshots/evento.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Añadir Google, Microsoft, Zoho, CalDAV o ICS</caption>
+      <image>https://raw.githubusercontent.com/fersot/kandy/main/docs/screenshots/cuentas.png</image>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Office</category>
+    <category>Calendar</category>
+  </categories>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-11-10">
+      <description>
+        <p>Primera versión: Google, Microsoft, Zoho, CalDAV e ICS.</p>
+      </description>
+    </release>
+  </releases>
+</component>

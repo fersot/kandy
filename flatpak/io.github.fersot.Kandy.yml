@@ -1,0 +1,73 @@
+# Manifiesto Flatpak de Kandy.
+#
+# Compila desde el código fuente DENTRO del sandbox (runtime GNOME 51 con
+# WebKitGTK 4.1), así el binario enlaza contra las bibliotecas del runtime y no
+# contra las del sistema anfitrión.
+#
+# Construcción local:   ./flatpak/build.sh
+#
+# Nota: el módulo usa `--share=network` durante la compilación para descargar
+# crates y paquetes npm. Es válido para builds locales/CI; Flathub exige
+# fuentes offline (ver README → "Publicar en Flathub").
+id: io.github.fersot.Kandy
+runtime: org.gnome.Platform
+runtime-version: '51'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+  - org.freedesktop.Sdk.Extension.node24
+command: kandy
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  # APIs de Google/Microsoft/Zoho/CalDAV y servidor loopback de OAuth.
+  - --share=network
+  # Recordatorios de eventos.
+  - --talk-name=org.freedesktop.Notifications
+  # Respaldo para guardar tokens si el portal Secret no está disponible.
+  - --talk-name=org.freedesktop.secrets
+
+modules:
+  - name: kandy
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/node24/bin
+      env:
+        CARGO_HOME: /run/build/kandy/cargo
+        npm_config_cache: /run/build/kandy/npm-cache
+        npm_config_update_notifier: 'false'
+        # Credenciales OAuth opcionales incorporadas en el binario
+        # (si no, el usuario las introduce en Ajustes):
+        # KANDY_GOOGLE_CLIENT_ID: '...'
+        # KANDY_GOOGLE_CLIENT_SECRET: '...'
+        # KANDY_MICROSOFT_CLIENT_ID: '...'
+        # KANDY_ZOHO_CLIENT_ID: '...'
+        # KANDY_ZOHO_CLIENT_SECRET: '...'
+      build-args:
+        - --share=network
+    build-commands:
+      - npm ci --no-audit --no-fund
+      - npm run tauri -- build --no-bundle
+      - install -Dm755 src-tauri/target/release/kandy /app/bin/kandy
+      - install -Dm644 flatpak/io.github.fersot.Kandy.desktop /app/share/applications/io.github.fersot.Kandy.desktop
+      - install -Dm644 flatpak/io.github.fersot.Kandy.metainfo.xml /app/share/metainfo/io.github.fersot.Kandy.metainfo.xml
+      - install -Dm644 src-tauri/icons/kandy.svg /app/share/icons/hicolor/scalable/apps/io.github.fersot.Kandy.svg
+      - install -Dm644 src-tauri/icons/32x32.png /app/share/icons/hicolor/32x32/apps/io.github.fersot.Kandy.png
+      - install -Dm644 src-tauri/icons/64x64.png /app/share/icons/hicolor/64x64/apps/io.github.fersot.Kandy.png
+      - install -Dm644 src-tauri/icons/128x128.png /app/share/icons/hicolor/128x128/apps/io.github.fersot.Kandy.png
+      - install -Dm644 src-tauri/icons/128x128@2x.png /app/share/icons/hicolor/256x256/apps/io.github.fersot.Kandy.png
+      - install -Dm644 src-tauri/icons/icon.png /app/share/icons/hicolor/512x512/apps/io.github.fersot.Kandy.png
+    sources:
+      - type: dir
+        path: ..
+        skip:
+          - node_modules
+          - dist
+          - src-tauri/target
+          - src-tauri/gen
+          - flatpak/build-dir
+          - flatpak/repo
+          - .flatpak-builder

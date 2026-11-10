@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Kandy
+GenericName=Calendario
+GenericName[en]=Calendar
+Comment=Tus calendarios de Google, Microsoft, Zoho y CalDAV en un solo lugar
+Comment[en]=Your Google, Microsoft, Zoho and CalDAV calendars in one place
+Exec=kandy
+Icon=io.github.fersot.Kandy
+Terminal=false
+Categories=Office;Calendar;
+Keywords=calendar;agenda;events;google;outlook;microsoft;zoho;caldav;icloud;calendario;eventos;
+StartupNotify=true
+StartupWMClass=kandy
